@@ -1,0 +1,241 @@
+<html>
+<head>
+    <title>Umrah Planner</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+        .container h1 {
+            text-align: center;
+            color: #f5a623;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+        .form-group input[type="date"] {
+            padding-right: 30px;
+        }
+        .form-group input[type="date"]::-webkit-calendar-picker-indicator {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+        .form-group input:focus, .form-group select:focus {
+            border-color: #80bdff;
+            outline: none;
+        }
+        .form-group .error {
+            border-color: #dc3545;
+        }
+        .form-group .error:focus {
+            border-color: #dc3545;
+        }
+        .form-group .error-message {
+            color: #dc3545;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #f5a623;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        .submit-btn i {
+            margin-right: 5px;
+        }
+        .submit-btn:hover {
+            background-color: #e5941f;
+        }
+        @media (max-width: 576px) {
+            .container {
+                padding: 15px;
+            }
+            .form-group input, .form-group select {
+                font-size: 12px;
+                padding: 8px;
+            }
+            .submit-btn {
+                font-size: 14px;
+                padding: 8px;
+            }
+        }
+    </style>
+    <script>
+        function sendWhatsAppMessage() {
+            const nomorHP = document.getElementById('nomor-hp').value;
+            const tanggalKeberangkatan = document.getElementById('tanggal-keberangkatan').value;
+            const tanggalKepulangan = document.getElementById('tanggal-kepulangan').value;
+            const tiket = document.getElementById('tiket').value;
+            const visa = document.getElementById('visa').value;
+            const nama = document.getElementById('nama').value;
+            const jumlahJamaah = document.getElementById('jumlah-jamaah').value;
+            const durasiMekkah = document.getElementById('durasi-mekkah').value;
+            const durasiMedinah = document.getElementById('durasi-medinah').value;
+            const hotelMekkah = document.getElementById('hotel-mekkah').value;
+            const hotelMadinah = document.getElementById('hotel-madinah').value;
+            const transportasiBus = document.getElementById('transportasi-bus').value;
+            const muthawif = document.getElementById('muthawif').value;
+            const katering = document.getElementById('katering').value;
+
+            const message = `Umrah Planner:
+Nama: ${nama}
+Nomor HP Jamaah: ${nomorHP}
+Tanggal Keberangkatan: ${tanggalKeberangkatan}
+Tanggal Kepulangan: ${tanggalKepulangan}
+Tiket: ${tiket}
+Visa: ${visa}
+Jumlah Jamaah: ${jumlahJamaah}
+Durasi Mekkah: ${durasiMekkah} hari
+Durasi Medinah: ${durasiMedinah} hari
+Hotel Mekkah: ${hotelMekkah}
+Hotel Madinah: ${hotelMadinah}
+Transportasi Bus: ${transportasiBus}
+Muthawif: ${muthawif} hari
+Katering: ${katering}`;
+
+            const whatsappURL = `https://wa.me/${nomorHP}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappURL, '_blank');
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Umrah Planner</h1>
+        <div class="form-group">
+            <label for="tanggal-keberangkatan">Tanggal Keberangkatan</label>
+            <input type="date" id="tanggal-keberangkatan" class="error">
+            <div class="error-message">Pilih tanggal keberangkatan...</div>
+        </div>
+        <div class="form-group">
+            <label for="tanggal-kepulangan">Tanggal Kepulangan</label>
+            <input type="date" id="tanggal-kepulangan">
+        </div>
+        <div class="form-group">
+            <label for="nomor-hp">Nomor HP Jamaah</label>
+            <input type="tel" id="nomor-hp" placeholder="Masukkan nomor HP" pattern="[0-9]{10,15}">
+        </div>
+        <div class="form-group">
+            <label for="tiket">Tiket</label>
+            <select id="tiket">
+                <option>Tiket Direct</option>
+                <option>Tiket Transit</option>
+                <option>Tiket Ekonomi</option>
+                <option>Tiket Bisnis</option>
+                <option>Tiket First Class</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="visa">Visa</label>
+            <select id="visa">
+                <option>Termasuk</option>
+                <option>Tidak Termasuk</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="nama">Nama</label>
+            <input type="text" id="nama" value="Erwin Azhari Wijaya">
+        </div>
+        <div class="form-group">
+            <label for="jumlah-jamaah">Jumlah Jamaah</label>
+            <input type="number" id="jumlah-jamaah" min="1" max="30" placeholder="Masukkan jumlah jamaah">
+        </div>
+        <div class="form-group">
+            <label for="durasi-mekkah">Durasi Mekkah</label>
+            <input type="number" id="durasi-mekkah" min="1" max="30" value="5">
+        </div>
+        <div class="form-group">
+            <label for="durasi-medinah">Durasi Medinah</label>
+            <input type="number" id="durasi-medinah" min="1" max="30" value="4">
+        </div>
+        <div class="form-group">
+            <label for="hotel-mekkah">Hotel Mekkah</label>
+            <select id="hotel-mekkah">
+                <option>Apartemen</option>
+                <option>Hotel Bintang 3</option>
+                <option>Hotel Bintang 4</option>
+                <option>Hotel Bintang 5</option>
+                <option>Tanpa Hotel</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="hotel-madinah">Hotel Madinah</label>
+            <select id="hotel-madinah">
+                <option>Apartemen</option>
+                <option>Hotel Bintang 3</option>
+                <option>Hotel Bintang 4</option>
+                <option>Hotel Bintang 5</option>
+                <option>Tanpa Hotel</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="transportasi-bus">Transportasi Bus</label>
+            <select id="transportasi-bus">
+                <option>Termasuk</option>
+                <option>Tidak Termasuk</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="muthawif">Muthawif (hari)</label>
+            <input type="number" id="muthawif" min="1" max="30" placeholder="Masukkan jumlah hari">
+        </div>
+        <div class="form-group">
+            <label for="katering">Katering</label>
+            <select id="katering">
+                <option>Catering</option>
+                <option>Fullboard</option>
+                <option>Tanpa Konsumsi</option>
+            </select>
+        </div>
+        <button class="submit-btn" onclick="sendWhatsAppMessage()">
+            <i class="fas fa-paper-plane"></i> Mengirim permintaan
+        </button>
+    </div>
+</body>
+</html>
